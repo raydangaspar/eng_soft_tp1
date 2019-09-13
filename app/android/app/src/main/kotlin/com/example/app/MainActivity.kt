@@ -1,4 +1,4 @@
-package ufmg.app
+package com.example.app
 
 import android.os.Bundle
 
