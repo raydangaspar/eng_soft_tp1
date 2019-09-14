@@ -1,4 +1,10 @@
 import "package:flutter/material.dart";
+import 'package:firebase_auth/firebase_auth.dart';
+
+enum FormType {
+  login,
+  register
+}
 
 class LoginScreen extends StatefulWidget {
 
@@ -12,17 +18,40 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen>{
 
   final formKey = GlobalKey<FormState>();
+
   String _email, _password;
 
-  void validateAndSave(){
+  FormType _formType = FormType.login;
+
+  bool validateAndSave(){
     final form = formKey.currentState;
     if (form.validate()){
       form.save();
-      print('Form is valid. Email: $_email');
+      return true;
     }
     else{
-      print('Form is invalid. Email: $_email');
+      return false;
     }
+  }
+
+  void validateAndSubmit() async {
+    if (validateAndSave()) {
+      try {
+        FirebaseUser user = (await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password)) as FirebaseUser;
+        print('Signed in: ${user.uid}');
+      }
+      catch (e) {
+        print('Error: $e');
+      }
+
+    }
+  }
+
+  void moveToRegister() {
+    setState(() {
+      _formType = FormType.register;
+    });
+
   }
 
   @override
@@ -54,7 +83,11 @@ class _LoginScreenState extends State<LoginScreen>{
               ),
               RaisedButton(
                 child: Text('Login', style: TextStyle(fontSize: 20)),
-                onPressed: validateAndSave,
+                onPressed: validateAndSubmit,
+              ),
+              FlatButton(
+                child: Text('Criar uma conta', style: TextStyle(fontSize: 20)),
+                onPressed: moveToRegister,
               )
             ],
           ),
