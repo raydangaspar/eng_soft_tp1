@@ -28,26 +28,20 @@ Tecnologia a ser utilizada:
 
 # User stories
 
+**Nome:** Cadastrar e editar produtos **Story Points:** 5\
 **Como um** usuário do tipo administrador do sistema\
-**Eu quero** poder cadastrar mercadorias\
-**para que** o sistema tenha produtos disponíveis para os clientes
+**Eu quero** poder cadastrar e editar mercadorias\
+**para que** o sistema tenha produtos disponíveis para os clientes e as informações e preços dos produtos fiquem sempre atualizadas
 
 ### Acceptance Criteria
 
 1. Consigo cadastrar um produto.
 2. Usuário consegue pesquisar por esse produto cadastrado.
+3. Consigo mudar as informações de um produto cadastrado
+4. Usuário vê a mudança em tempo real após pesquisar pelo produto.
 
 ----
-**Como um** usuário do tipo administrador do sistema\
-**Eu quero** poder editar as mercadorias existentes\
-**para que** as informações e preços dos produtos fiquem sempre atualizadas
-
-### Acceptance Criteria
-
-1. Consigo mudar as informações de um produto cadastrado
-2. Usuário vê a mudança em tempo real após pesquisar pelo produto.
-
-----
+**Nome:** Excluir mercadorias **Story Points:** 3\
 **Como um** usuário do tipo administrador do sistema\
 **Eu quero** poder excluir mercadorias do sistema\
 **para que** produtos indisponíveis não fiquem no sistema
@@ -58,6 +52,7 @@ Tecnologia a ser utilizada:
 2. Usuário não consegue mais achar mercadoria que foi excluída
 
 ----
+**Nome:** Colocar produto no carrinho **Story Points:** 3\
 **Como um** usuário do tipo comum\
 **Eu quero** poder adicionar uma mercadoria ao carrinho de compras\
 **para que** eu possa comprar mais de um produto por vez
@@ -68,6 +63,7 @@ Tecnologia a ser utilizada:
 2. Produto adicionado aparece no carrinho
 
 ----
+**Nome:** Tirar produto do carrinho **Story Points:** 3\
 **Como um** usuário do tipo comum\
 **Eu quero** poder excluir uma mercadoria do carrinho de compras\
 **para que** eu possa concluir minha compra sem esse produto
@@ -78,6 +74,7 @@ Tecnologia a ser utilizada:
 2. Produto excluído some do carrinho
 
 ----
+**Nome:** Finalizar compra **Story Points:** 3\
 **Como um** usuário do tipo comum\
 **Eu quero** finalizar minha compra\
 **para que** eu receba meus produtos
@@ -87,6 +84,7 @@ Tecnologia a ser utilizada:
 1. Usuário finaliza a compra e faz o pagamento
 
 ----
+**Nome:** Fazer cadastro no sistema **Story Points:** 5\
 **Como um** usuário do tipo comum\
 **Eu quero** me cadastrar no sistema\
 **para que** eu tenha uma conta no sistema
@@ -96,6 +94,7 @@ Tecnologia a ser utilizada:
 1. Usuário cadastra login e senha no sistema
 
 ----
+**Nome:** Fazer login no sistema **Story Points:** 3\
 **Como um** usuário do tipo comum\
 **Eu quero** realizar login no sistema\
 **para que** eu possa fazer compras
