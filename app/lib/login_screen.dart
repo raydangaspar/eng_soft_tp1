@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Login'),
+          title: Text('Faça seu login'),
       ),
       body: Container(
 
@@ -85,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen>{
                 child: Text('Login', style: TextStyle(fontSize: 20)),
                 onPressed: validateAndSubmit,
               ),
-              FlatButton(
+              RaisedButton(
                 child: Text('Criar uma conta', style: TextStyle(fontSize: 20)),
                 onPressed: moveToRegister,
               )
