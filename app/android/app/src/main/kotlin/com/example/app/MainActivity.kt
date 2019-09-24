@@ -1,4 +1,4 @@
-package com.example.app
+package com.engsoft_tp1.app
 
 import android.os.Bundle
 
