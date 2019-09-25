@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "101880856787",
+    "firebase_url": "https://engsoft-tp1.firebaseio.com",
+    "project_id": "engsoft-tp1",
+    "storage_bucket": "engsoft-tp1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:101880856787:android:dd595ac6c11f2480749426",
+        "android_client_info": {
+          "package_name": "com.engsoft_tp1.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "101880856787-ld4a6r8545m33nv7aen480rvi7l71jmr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8J7J6EXruJOWeVpLMhfmq_EzDeHOg2SQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "101880856787-ld4a6r8545m33nv7aen480rvi7l71jmr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

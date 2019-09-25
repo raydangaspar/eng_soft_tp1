@@ -1,5 +1,7 @@
-.ideia/*
 
+app/android/gradle/
+
+app/ios/
 
 # Miscellaneous
 *.class
