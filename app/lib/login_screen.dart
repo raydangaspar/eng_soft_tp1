@@ -1,3 +1,4 @@
+import 'package:app/showcase_screen.dart';
 import "package:flutter/material.dart";
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -48,9 +49,13 @@ class _LoginScreenState extends State<LoginScreen>{
   }
 
   void moveToRegister() {
-    setState(() {
-      _formType = FormType.register;
-    });
+//    setState(() {
+//      _formType = FormType.register;
+//    });
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Showcase()),
+    );
 
   }
 
