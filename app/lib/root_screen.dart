@@ -1,3 +1,4 @@
+import 'package:app/home_screen.dart';
 import 'package:app/login_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -37,6 +38,12 @@ class _RootScreenState extends State<RootScreen> {
     });
   }
 
+  void _signedOut() {
+    setState(() {
+      authStatus = AuthStatus.notSignedIn;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     switch (authStatus) {
@@ -46,11 +53,9 @@ class _RootScreenState extends State<RootScreen> {
           onSignedIn: _signedIn,
         );
       case AuthStatus.signedIn:
-        return Scaffold(
-          body: Container(
-            padding: EdgeInsets.all(20),
-            child: Text('Bem-Vindo! \n\n Limpe o cache do app para fazer logout', style: TextStyle(fontSize: 70)),
-          ),
+        return HomeScreen(
+          auth: widget.auth,
+          onSignedOut: _signedOut,
         );
     }
   }
