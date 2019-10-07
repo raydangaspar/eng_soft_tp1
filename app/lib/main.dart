@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'auth.dart';
+import 'login_screen.dart';
+import 'root_screen.dart';
 
 import 'login_screen.dart';
 
@@ -10,9 +13,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Sistema de gerenciamento de estoque e vendas',
       theme: ThemeData(
-        primarySwatch: Colors.grey,
+        primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),
+
+      home: RootScreen(auth: Auth()),
+
     );
   }
 }
