@@ -1,3 +1,6 @@
+import 'package:firebase_database/firebase_database.dart';
+final databaseReference = FirebaseDatabase.instance.reference();
+
 class ItemList{
   List<ItemDetailListItem> itemList;
 
@@ -10,7 +13,7 @@ class ItemList{
   }
 
   static List<ItemDetailListItem> parseitens(itemJSON){
-    var iList=itemJSON['browseItens'] as List;
+    var iList=itemJSON['products'] as List;
     List<ItemDetailListItem> recipeList=iList.map((data) => ItemDetailListItem.fromJson(data)).toList();
     return recipeList;
   }
