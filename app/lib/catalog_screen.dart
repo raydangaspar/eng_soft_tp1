@@ -40,6 +40,57 @@ class _AddButton extends StatelessWidget {
   }
 }
 
+class _RmvButton extends StatelessWidget {
+  final Item item;
+
+  const _RmvButton({Key key, @required this.item}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var cart = Provider.of<CartModel>(context);
+
+    return FlatButton(
+      onPressed: cart.items.contains(item) ? () => cart.rmv(item) : null ,
+      splashColor: Theme.of(context).primaryColor,
+      child: cart.items.contains(item)
+          ? Icon(Icons.remove, semanticLabel: 'RMVED')
+          : Text('RMV'),
+    );
+  }
+}
+
+
+class _Add_Rmv_Button extends StatelessWidget {
+  final Item item;
+
+  const _Add_Rmv_Button({Key key, @required this.item}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var cart = Provider.of<CartModel>(context);
+
+  if (cart.items.contains(item) ) {
+      return FlatButton(
+      onPressed: cart.items.contains(item) ? () => cart.rmv(item) : null ,
+      splashColor: Theme.of(context).primaryColor,
+      child: cart.items.contains(item)
+          ? Icon(Icons.delete_forever, semanticLabel: 'RMVED')
+          : Text('RMV'),
+    );
+  } else {
+      return FlatButton(
+      onPressed: cart.items.contains(item) ? null : () => cart.add(item),
+      splashColor: Theme.of(context).primaryColor,
+      child: cart.items.contains(item)
+          ? Text('ADD')
+          : Icon(Icons.control_point, semanticLabel: 'ADDED'),
+    );
+  }
+
+  }
+}
+
+
 class _MyAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -89,8 +140,11 @@ class _MyListItem extends StatelessWidget {
               child: Text(item.price.toString()),
             ),
 
-            SizedBox(),
-            _AddButton(item: item),
+            //SizedBox(),
+            //_AddButton(item: item),
+
+             SizedBox(),
+            _Add_Rmv_Button(item: item,)
           ],
         ),
       ),
