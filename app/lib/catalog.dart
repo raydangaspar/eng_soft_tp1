@@ -19,8 +19,6 @@ class CatalogModel {
     'Fone',
   ];
 
-  /// Get item by [id].
-  ///
   /// In this sample, the catalog is infinite, looping over [_itemNames].
   Item getById(int id) => Item(id, _itemNames[id % _itemNames.length]);
 
@@ -31,7 +29,7 @@ class CatalogModel {
     return getById(position);
   }
 }
-
+  // GAMBIARAITOR
 @immutable
 class Item {
   final int id;
@@ -43,6 +41,7 @@ class Item {
       // To make the sample app look nicer, each item is given one of the
       // Material Design primary colors.
       : color = Colors.primaries[id % Colors.primaries.length];
+  
 
   @override
   int get hashCode => id;

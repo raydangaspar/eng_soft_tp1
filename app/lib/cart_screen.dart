@@ -1,7 +1,3 @@
-// Copyright 2019 The Flutter team. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:app/cart.dart';
@@ -11,11 +7,11 @@ class MyCart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cart', style: Theme.of(context).textTheme.display4),
+        title: Text('Lista de compras', style: Theme.of(context).textTheme.display4),
         backgroundColor: Colors.white,
       ),
       body: Container(
-        color: Colors.yellow,
+        color: Colors.greenAccent,
         child: Column(
           children: [
             Expanded(
@@ -65,15 +61,15 @@ class _CartTotal extends StatelessWidget {
           children: [
             Consumer<CartModel>(
                 builder: (context, cart, child) =>
-                    Text('\$${cart.totalPrice}', style: hugeStyle)),
+                    Text('R\$${cart.totalPrice}', style: hugeStyle)),
             SizedBox(width: 24),
             FlatButton(
               onPressed: () {
                 Scaffold.of(context).showSnackBar(
-                    SnackBar(content: Text('Buying not supported yet.')));
+                    SnackBar(content: Text('A função de compra ainda não foi implementada')));
               },
               color: Colors.white,
-              child: Text('BUY'),
+              child: Text('COMPRE'),
             ),
           ],
         ),

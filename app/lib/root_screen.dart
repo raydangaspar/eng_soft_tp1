@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:app/cart.dart';
 import 'package:app/catalog.dart';
 import 'package:app/catalog_screen.dart';
+import 'package:app/theme.dart';
 
 import 'auth.dart';
 
@@ -71,6 +72,7 @@ class _RootScreenState extends State<RootScreen> {
           ],
           child: MaterialApp(
             title: 'Provider Demo',
+            theme: appTheme,
             initialRoute: '/',
             routes: {
               '/': (context) => MyCatalog(),
