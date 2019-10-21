@@ -44,7 +44,7 @@ class _MyAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      title: Text('Catalog', style: Theme.of(context).textTheme.display4),
+      title: Text('Catalogo de Produtos', style: Theme.of(context).textTheme.display4),
       floating: true,
       actions: [
         IconButton(
@@ -83,7 +83,13 @@ class _MyListItem extends StatelessWidget {
             Expanded(
               child: Text(item.name, style: textTheme),
             ),
-            SizedBox(width: 24),
+
+            SizedBox(width: 10),
+            Expanded(
+              child: Text(item.price.toString()),
+            ),
+
+            SizedBox(),
             _AddButton(item: item),
           ],
         ),
