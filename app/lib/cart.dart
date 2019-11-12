@@ -1,3 +1,4 @@
+import 'package:app/catalog_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:app/catalog.dart';
 
@@ -25,7 +26,7 @@ class CartModel extends ChangeNotifier {
       items.fold(0, (total, current) => total + current.price);
 
   /// Adds [item] to cart. This is the only way to modify the cart from outside.
-  void add(Item item) {
+  void add(Record item) {
     _itemIds.add(item.id);
     // This line tells [Model] that it should rebuild the widgets that
     // depend on it.
@@ -33,7 +34,7 @@ class CartModel extends ChangeNotifier {
   }
 
   /// Adds [item] to cart. This is the only way to modify the cart from outside.
-  void rmv(Item item) {
+  void rmv(Record item) {
     _itemIds.remove(item.id);
     // This line tells [Model] that it should rebuild the widgets that
     // depend on it.
