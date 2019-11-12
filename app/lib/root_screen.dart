@@ -75,7 +75,10 @@ class _RootScreenState extends State<RootScreen> {
             theme: appTheme,
             initialRoute: '/',
             routes: {
-              '/': (context) => MyCatalog(),
+              '/': (context) => MyCatalog(
+                auth: widget.auth,
+                onSignedOut: _signedOut,
+              ),
               '/cart': (context) => MyCart(),
             },
           ),

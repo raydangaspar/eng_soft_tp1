@@ -3,13 +3,42 @@ import 'package:provider/provider.dart';
 import 'package:app/cart.dart';
 import 'package:app/catalog.dart';
 
+import 'package:app/auth.dart';
+
 class MyCatalog extends StatelessWidget {
+  MyCatalog({this.auth, this.onSignedOut});
+  final BaseAuth auth;
+  final VoidCallback onSignedOut;
+
+  void _signOut() async {
+    try{
+      await auth.signOut();
+      onSignedOut();
+    }
+    catch(e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          _MyAppBar(),
+        SliverAppBar(
+          title: Text('Catalogo de Produtos', style: Theme.of(context).textTheme.display4),
+          floating: true,
+          actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.shopping_cart),
+            onPressed: () => Navigator.pushNamed(context, '/cart'),
+          ),
+          FlatButton(
+              child: Text('Logout', style: TextStyle(fontSize: 17, color: Colors.white)),
+              onPressed: _signOut
+          )
+        ],
+      ),
           SliverToBoxAdapter(child: SizedBox(height: 12)),
           SliverList(
             delegate: SliverChildBuilderDelegate(
