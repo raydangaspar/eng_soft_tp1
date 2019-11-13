@@ -102,21 +102,25 @@ class AddRmvButton extends StatelessWidget {
   Widget build(BuildContext context) {
     var cart = Provider.of<CartModel>(context);
 
-  if (cart.items.contains(item) ) {
-      print("Contem" + item.name);
+  var contains = false;
+
+  for(var i in cart.items){
+    if(i.id == item.id) contains = true;
+  }
+
+  if (contains) {
       return FlatButton(
-      onPressed: cart.items.contains(item) ? () => cart.rmv(item) : null ,
+      onPressed: contains ? () => cart.rmv(item) : null ,
       splashColor: Theme.of(context).primaryColor,
-      child: cart.items.contains(item)
+      child: contains
           ? Icon(Icons.delete_forever, semanticLabel: 'RMVED')
           : Text('RMV'),
     );
   } else {
-      print("Não Contem" + item.name);
       return FlatButton(
-      onPressed: cart.items.contains(item) ? null : () => cart.add(item),
+      onPressed: contains ? null : () => cart.add(item),
       splashColor: Theme.of(context).primaryColor,
-      child: cart.items.contains(item)
+      child: contains
           ? Text('ADD')
           : Icon(Icons.control_point, semanticLabel: 'ADDED'),
     );

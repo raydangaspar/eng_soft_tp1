@@ -6,7 +6,7 @@ class CartModel extends ChangeNotifier {
   final CatalogModel _catalog;
 
   void addItemToCatalogItemsList(Record record){
-    _catalog.isertItemOnItemsList(record);
+    _catalog.insertItemOnItemsList(record);
   }
 
   /// Internal, private state of the cart. Stores the ids of each item.

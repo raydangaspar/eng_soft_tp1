@@ -1,29 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-/// TODO: Botar esse trem no firebase
 class CatalogModel {
 
   List<Record> itemsList;
 
-  static const _itemNames = [
-    'Caixa de Som',
-    'Monitor',
-    'Teclado',
-    'Mouse',
-    'Processador',
-    'Memoria Ram',
-    'Placa de Video',
-    'Fan',
-    'Fita Led',
-    'Cadeira',
-    'Placa de rede',
-    'Fonte',
-    'Gabinete',
-    'Fone',
-  ];
-
-  void isertItemOnItemsList(Record record) {
+  void insertItemOnItemsList(Record record) {
     if(itemsList == null) itemsList = new List<Record>();
     itemsList.add(record);
   }
