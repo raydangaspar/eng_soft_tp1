@@ -7,7 +7,7 @@ final appTheme = ThemeData(
       fontFamily: 'Corben',
       fontWeight: FontWeight.w700,
       fontSize: 24,
-      color: Colors.black,
+      color: Colors.white,
     ),
   ),
 );

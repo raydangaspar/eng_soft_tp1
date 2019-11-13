@@ -1,6 +1,5 @@
-import 'package:app/catalog_screen.dart';
-import 'package:flutter/foundation.dart';
 import 'package:app/catalog.dart';
+import 'package:flutter/foundation.dart';
 
 class CartModel extends ChangeNotifier {
   /// The current catalog. Used to construct items from numeric ids.

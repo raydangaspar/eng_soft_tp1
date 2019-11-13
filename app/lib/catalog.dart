@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 /// TODO: Botar esse trem no firebase
@@ -48,4 +49,28 @@ class Item {
 
   @override
   bool operator ==(Object other) => other is Item && other.id == id;
+}
+
+@immutable
+class Record {
+  final int id;
+  final String name;
+  final String url;
+  final int quantity;
+  final int price;
+  final DocumentReference reference;
+
+  Record.fromMap(Map<String, dynamic> map, {this.reference})
+      : id = map['id'],
+        name = map['name'],
+        url = map['url'],
+        price = map['price'],
+        quantity = map['quantity'];
+
+  Record.fromSnapshot(DocumentSnapshot snapshot)
+      : this.fromMap(snapshot.data, reference: snapshot.reference);
+
+  @override
+  String toString() => "Record<$name:$price>";
+
 }
