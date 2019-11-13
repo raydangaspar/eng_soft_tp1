@@ -62,6 +62,9 @@ class MyCatalog extends StatelessWidget {
   Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
     final record = Record.fromSnapshot(data);
 
+    var cart = Provider.of<CartModel>(context);
+    cart.addItemToCatalogItemsList(record);
+
     return Padding(
       key: ValueKey(record.name),
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -80,7 +83,7 @@ class MyCatalog extends StatelessWidget {
             ),
 
             SizedBox(),
-            AddRmvButton(item: record,)
+            AddRmvButton(item: record)
           ],
         ),
       ),
@@ -100,6 +103,7 @@ class AddRmvButton extends StatelessWidget {
     var cart = Provider.of<CartModel>(context);
 
   if (cart.items.contains(item) ) {
+      print("Contem" + item.name);
       return FlatButton(
       onPressed: cart.items.contains(item) ? () => cart.rmv(item) : null ,
       splashColor: Theme.of(context).primaryColor,
@@ -108,6 +112,7 @@ class AddRmvButton extends StatelessWidget {
           : Text('RMV'),
     );
   } else {
+      print("Não Contem" + item.name);
       return FlatButton(
       onPressed: cart.items.contains(item) ? null : () => cart.add(item),
       splashColor: Theme.of(context).primaryColor,

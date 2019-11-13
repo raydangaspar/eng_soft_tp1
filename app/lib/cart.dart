@@ -5,6 +5,10 @@ class CartModel extends ChangeNotifier {
   /// The current catalog. Used to construct items from numeric ids.
   final CatalogModel _catalog;
 
+  void addItemToCatalogItemsList(Record record){
+    _catalog.isertItemOnItemsList(record);
+  }
+
   /// Internal, private state of the cart. Stores the ids of each item.
   final List<int> _itemIds;
 
@@ -18,7 +22,7 @@ class CartModel extends ChangeNotifier {
         _itemIds = previous?._itemIds ?? [];
 
   /// List of items in the cart.
-  List<Item> get items => _itemIds.map((id) => _catalog.getById(id)).toList();
+  List<Record> get items => _itemIds.map((id) => _catalog.getById(id)).toList();
 
   /// The current total price of all items.
   int get totalPrice =>

@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 
 /// TODO: Botar esse trem no firebase
 class CatalogModel {
+
+  List<Record> itemsList;
+
   static const _itemNames = [
     'Caixa de Som',
     'Monitor',
@@ -20,15 +23,25 @@ class CatalogModel {
     'Fone',
   ];
 
+  void isertItemOnItemsList(Record record) {
+    if(itemsList == null) itemsList = new List<Record>();
+    itemsList.add(record);
+  }
+
   /// In this sample, the catalog is infinite, looping over [_itemNames].
-  Item getById(int id) => Item(id, _itemNames[id % _itemNames.length]);
+//  Item getById(int id) => Item(id, _itemNames[id % _itemNames.length]);
+  Record getById(int id) {
+    for(var r in itemsList){
+      if(r.id == id) return r;
+    }
+  }
 
   /// Get item by its position in the catalog.
-  Item getByPosition(int position) {
-    // In this simplified case, an item's position in the catalog
-    // is also its id.
-    return getById(position);
-  }
+//  Item getByPosition(int position) {
+//    // In this simplified case, an item's position in the catalog
+//    // is also its id.
+//    return getById(position);
+//  }
 }
   // GAMBIARAITOR
 @immutable
