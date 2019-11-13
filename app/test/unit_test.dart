@@ -410,4 +410,424 @@ void main() {
   });
   //End: Testes de card.dart
 
+  test('Verifica ID único de cada produto', () {
+    List<int> ids = new List<int>();
+
+    var produto = {
+      "id": 123,
+      "name": 'teclado',
+      "url": "null",
+      "price": 100,
+      "quantity": 3,
+    };
+    var produto2 = {
+      "id": 124,
+      "name": 'mouse',
+      "url": "null",
+      "price": 150,
+      "quantity": 1,
+    };
+    var produto3 = {
+      "id": 125,
+      "name": 'tela',
+      "url": "null",
+      "price": 400,
+      "quantity": 4,
+    };
+
+    final p1 = cat.Record.fromMap(produto);
+    final p2 = cat.Record.fromMap(produto2);
+    final p3 = cat.Record.fromMap(produto3);
+    final catalog_test = cat.CatalogModel();
+
+    catalog_test.insertItemOnItemsList(p1);
+    catalog_test.insertItemOnItemsList(p2);
+    catalog_test.insertItemOnItemsList(p3);
+
+    if(catalog_test.itemsList != null && !catalog_test.itemsList.contains(p1)) {
+      catalog_test.insertItemOnItemsList(p1);
+    }
+    if(!catalog_test.itemsList.contains(p2)) {
+      catalog_test.insertItemOnItemsList(p2);
+    }
+    if(!catalog_test.itemsList.contains(p3)) {
+      catalog_test.insertItemOnItemsList(p3);
+    }
+
+    expect(catalog_test.itemsList.length, 3);
+
+  });
+
+  test('Verifica preço de acordo com a unicidade de cada produto', () {
+    List<int> ids = new List<int>();
+
+    var produto = {
+      "id": 123,
+      "name": 'teclado',
+      "url": "null",
+      "price": 100,
+      "quantity": 3,
+    };
+    var produto2 = {
+      "id": 124,
+      "name": 'mouse',
+      "url": "null",
+      "price": 150,
+      "quantity": 1,
+    };
+    var produto3 = {
+      "id": 125,
+      "name": 'tela',
+      "url": "null",
+      "price": 400,
+      "quantity": 4,
+    };
+
+    final p1 = cat.Record.fromMap(produto);
+    final p2 = cat.Record.fromMap(produto2);
+    final p3 = cat.Record.fromMap(produto3);
+    final catalog_test = cat.CatalogModel();
+
+    catalog_test.insertItemOnItemsList(p1);
+    catalog_test.insertItemOnItemsList(p2);
+    catalog_test.insertItemOnItemsList(p3);
+
+    final cart_test = cart.CartModel(catalog_test, null );
+
+    cart_test.add(p1);
+    cart_test.add(p2);
+    cart_test.add(p3);
+
+    if(catalog_test.itemsList != null && !catalog_test.itemsList.contains(p1)) {
+      catalog_test.insertItemOnItemsList(p1);
+      cart_test.add(p1);
+    }
+    if(!catalog_test.itemsList.contains(p2)) {
+      catalog_test.insertItemOnItemsList(p2);
+      cart_test.add(p2);
+    }
+    if(!catalog_test.itemsList.contains(p3)) {
+      catalog_test.insertItemOnItemsList(p3);
+      cart_test.add(p3);
+    }
+
+    expect(cart_test.totalPrice , 650);
+  });
+
+  test('Verifica preço de acordo com a unicidade de cada produto apos remoções', () {
+    List<int> ids = new List<int>();
+
+    var produto = {
+      "id": 123,
+      "name": 'teclado',
+      "url": "null",
+      "price": 100,
+      "quantity": 3,
+    };
+    var produto2 = {
+      "id": 124,
+      "name": 'mouse',
+      "url": "null",
+      "price": 150,
+      "quantity": 1,
+    };
+    var produto3 = {
+      "id": 125,
+      "name": 'tela',
+      "url": "null",
+      "price": 400,
+      "quantity": 4,
+    };
+
+    final p1 = cat.Record.fromMap(produto);
+    final p2 = cat.Record.fromMap(produto2);
+    final p3 = cat.Record.fromMap(produto3);
+    final catalog_test = cat.CatalogModel();
+
+    catalog_test.insertItemOnItemsList(p1);
+    catalog_test.insertItemOnItemsList(p2);
+    catalog_test.insertItemOnItemsList(p3);
+
+    final cart_test = cart.CartModel(catalog_test, null );
+
+    cart_test.add(p1);
+    cart_test.add(p2);
+    cart_test.add(p3);
+
+    if(catalog_test.itemsList != null && !catalog_test.itemsList.contains(p1)) {
+      catalog_test.insertItemOnItemsList(p1);
+      cart_test.add(p1);
+    }
+    if(!catalog_test.itemsList.contains(p2)) {
+      catalog_test.insertItemOnItemsList(p2);
+      cart_test.add(p2);
+    }
+    if(!catalog_test.itemsList.contains(p3)) {
+      catalog_test.insertItemOnItemsList(p3);
+      cart_test.add(p3);
+    }
+
+    cart_test.rmv(p1);
+    cart_test.rmv(p2);
+    cart_test.rmv(p3);
+
+    expect(cart_test.totalPrice , 0);
+  });
+
+  test('Verifica a quantidade de produtos no carrinho de acordo com a unicidade de cada produto sem utilizar o método overrided contains', () {
+    List<int> ids = new List<int>();
+
+    var produto = {
+      "id": 123,
+      "name": 'teclado',
+      "url": "null",
+      "price": 100,
+      "quantity": 3,
+    };
+    var produto2 = {
+      "id": 124,
+      "name": 'mouse',
+      "url": "null",
+      "price": 150,
+      "quantity": 1,
+    };
+    var produto3 = {
+      "id": 125,
+      "name": 'tela',
+      "url": "null",
+      "price": 400,
+      "quantity": 4,
+    };
+
+    final p1 = cat.Record.fromMap(produto);
+    final p2 = cat.Record.fromMap(produto2);
+    final p3 = cat.Record.fromMap(produto3);
+    final catalog_test = cat.CatalogModel();
+
+    catalog_test.insertItemOnItemsList(p1);
+    catalog_test.insertItemOnItemsList(p2);
+    catalog_test.insertItemOnItemsList(p3);
+
+    final cart_test = cart.CartModel(catalog_test, null );
+
+    cart_test.add(p1);
+    cart_test.add(p2);
+    cart_test.add(p3);
+
+    var insert = true;
+    for(var item in catalog_test.itemsList){
+      if(item.id == p1.id){
+        insert = false;
+      }
+    }
+    if(insert) cart_test.add(p1);
+
+    insert = true;
+    for(var item in catalog_test.itemsList){
+      if(item.id == p2.id){
+        insert = false;
+      }
+    }
+    if(insert) cart_test.add(p2);
+
+    insert = true;
+    for(var item in catalog_test.itemsList){
+      if(item.id == p3.id){
+        insert = false;
+      }
+    }
+    if(insert) cart_test.add(p3);
+
+    expect(catalog_test.itemsList.length, 3);
+  });
+
+  test('Verifica preço de acordo com a unicidade de cada produto sem utilizar o método overrided contains', () {
+    List<int> ids = new List<int>();
+
+    var produto = {
+      "id": 123,
+      "name": 'teclado',
+      "url": "null",
+      "price": 100,
+      "quantity": 3,
+    };
+    var produto2 = {
+      "id": 124,
+      "name": 'mouse',
+      "url": "null",
+      "price": 150,
+      "quantity": 1,
+    };
+    var produto3 = {
+      "id": 125,
+      "name": 'tela',
+      "url": "null",
+      "price": 400,
+      "quantity": 4,
+    };
+
+    final p1 = cat.Record.fromMap(produto);
+    final p2 = cat.Record.fromMap(produto2);
+    final p3 = cat.Record.fromMap(produto3);
+    final catalog_test = cat.CatalogModel();
+
+    catalog_test.insertItemOnItemsList(p1);
+    catalog_test.insertItemOnItemsList(p2);
+    catalog_test.insertItemOnItemsList(p3);
+
+    final cart_test = cart.CartModel(catalog_test, null );
+
+    cart_test.add(p1);
+    cart_test.add(p2);
+    cart_test.add(p3);
+
+    var insert = true;
+    for(var item in catalog_test.itemsList){
+      if(item.id == p1.id){
+        insert = false;
+      }
+    }
+    if(insert) cart_test.add(p1);
+
+    insert = true;
+    for(var item in catalog_test.itemsList){
+      if(item.id == p2.id){
+        insert = false;
+      }
+    }
+    if(insert) cart_test.add(p2);
+
+    insert = true;
+    for(var item in catalog_test.itemsList){
+      if(item.id == p3.id){
+        insert = false;
+      }
+    }
+    if(insert) cart_test.add(p3);
+
+    expect(cart_test.totalPrice , 650);
+  });
+
+  test('Verifica preço de acordo com a unicidade de cada produto sem utilizar o método overrided contains apos remocoes', () {
+    List<int> ids = new List<int>();
+
+    var produto = {
+      "id": 123,
+      "name": 'teclado',
+      "url": "null",
+      "price": 100,
+      "quantity": 3,
+    };
+    var produto2 = {
+      "id": 124,
+      "name": 'mouse',
+      "url": "null",
+      "price": 150,
+      "quantity": 1,
+    };
+    var produto3 = {
+      "id": 125,
+      "name": 'tela',
+      "url": "null",
+      "price": 400,
+      "quantity": 4,
+    };
+
+    final p1 = cat.Record.fromMap(produto);
+    final p2 = cat.Record.fromMap(produto2);
+    final p3 = cat.Record.fromMap(produto3);
+    final catalog_test = cat.CatalogModel();
+
+    catalog_test.insertItemOnItemsList(p1);
+    catalog_test.insertItemOnItemsList(p2);
+    catalog_test.insertItemOnItemsList(p3);
+
+    final cart_test = cart.CartModel(catalog_test, null );
+
+    cart_test.add(p1);
+    cart_test.add(p2);
+    cart_test.add(p3);
+
+    for(var item in catalog_test.itemsList){
+      if(item.id == p1.id){
+        cart_test.rmv(item);
+      }
+    }
+
+    for(var item in catalog_test.itemsList){
+      if(item.id == p2.id){
+        cart_test.rmv(item);
+      }
+    }
+
+    for(var item in catalog_test.itemsList){
+      if(item.id == p3.id){
+        cart_test.rmv(item);
+      }
+    }
+
+    expect(cart_test.totalPrice , 0);
+  });
+
+  test('Verifica a quantidade de produtos no carrinho de acordo com a unicidade de cada produto sem utilizar o método overrided contains', () {
+    List<int> ids = new List<int>();
+
+    var produto = {
+      "id": 123,
+      "name": 'teclado',
+      "url": "null",
+      "price": 100,
+      "quantity": 3,
+    };
+    var produto2 = {
+      "id": 124,
+      "name": 'mouse',
+      "url": "null",
+      "price": 150,
+      "quantity": 1,
+    };
+    var produto3 = {
+      "id": 125,
+      "name": 'tela',
+      "url": "null",
+      "price": 400,
+      "quantity": 4,
+    };
+
+    final p1 = cat.Record.fromMap(produto);
+    final p2 = cat.Record.fromMap(produto2);
+    final p3 = cat.Record.fromMap(produto3);
+    final catalog_test = cat.CatalogModel();
+
+    catalog_test.insertItemOnItemsList(p1);
+    catalog_test.insertItemOnItemsList(p2);
+    catalog_test.insertItemOnItemsList(p3);
+
+    final cart_test = cart.CartModel(catalog_test, null );
+
+    cart_test.add(p1);
+    cart_test.add(p2);
+    cart_test.add(p3);
+
+    for(var item in catalog_test.itemsList){
+      if(item.id == p1.id){
+        cart_test.rmv(p1);
+      }
+    }
+
+    for(var item in catalog_test.itemsList){
+      if(item.id == p2.id){
+        cart_test.rmv(p2);
+      }
+    }
+
+    for(var item in catalog_test.itemsList){
+      if(item.id == p3.id){
+        cart_test.rmv(p3);
+      }
+    }
+
+    expect(cart_test.items.length, 0);
+  });
+
 }
