@@ -1,3 +1,4 @@
+import 'package:app/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'auth.dart';
 import 'login_screen.dart';
@@ -9,14 +10,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Sistema de gerenciamento de estoque e vendas',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return AuthProvider(
+      auth: Auth(),
+      child: MaterialApp(
+        title: 'Sistema de gerenciamento de estoque e vendas',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+
+        home: RootScreen(),
+
       ),
-
-      home: RootScreen(auth: Auth()),
-
     );
   }
 }

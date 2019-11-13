@@ -5,12 +5,14 @@ import 'package:app/catalog.dart';
 
 import 'package:app/auth.dart';
 
+import 'auth_provider.dart';
+
 class MyCatalog extends StatelessWidget {
-  MyCatalog({this.auth, this.onSignedOut});
-  final BaseAuth auth;
+  MyCatalog({this.onSignedOut});
   final VoidCallback onSignedOut;
 
-  void _signOut() async {
+  void _signOut(BuildContext context) async {
+    var auth = AuthProvider.of(context).auth;
     try{
       await auth.signOut();
       onSignedOut();
@@ -35,7 +37,7 @@ class MyCatalog extends StatelessWidget {
           ),
           FlatButton(
               child: Text('Logout', style: TextStyle(fontSize: 17, color: Colors.white)),
-              onPressed: _signOut
+              onPressed: () => _signOut(context)
           )
         ],
       ),

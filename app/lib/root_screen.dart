@@ -1,3 +1,4 @@
+import 'package:app/auth_provider.dart';
 import 'package:app/cart_screen.dart';
 import 'package:app/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +11,6 @@ import 'package:app/theme.dart';
 import 'auth.dart';
 
 class RootScreen extends StatefulWidget{
-  RootScreen({this.auth});
-  final BaseAuth auth;
-
   @override
   State<StatefulWidget> createState() {
     return _RootScreenState();
@@ -28,9 +26,10 @@ class _RootScreenState extends State<RootScreen> {
   AuthStatus authStatus = AuthStatus.notSignedIn;
 
   @override
-  void initState() {
-    super.initState();
-    widget.auth.currentUser().then((userId) {
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    var auth = AuthProvider.of(context).auth;
+    auth.currentUser().then((userId) {
       setState(() {
         authStatus = userId == null ? AuthStatus.notSignedIn : AuthStatus.signedIn;
       });
@@ -54,7 +53,6 @@ class _RootScreenState extends State<RootScreen> {
     switch (authStatus) {
       case AuthStatus.notSignedIn:
         return LoginScreen(
-            auth: widget.auth,
           onSignedIn: _signedIn,
         );
       case AuthStatus.signedIn:
@@ -76,7 +74,6 @@ class _RootScreenState extends State<RootScreen> {
             initialRoute: '/',
             routes: {
               '/': (context) => MyCatalog(
-                auth: widget.auth,
                 onSignedOut: _signedOut,
               ),
               '/cart': (context) => MyCart(),

@@ -1,6 +1,18 @@
+import 'package:app/auth_provider.dart';
 import "package:flutter/material.dart";
-
 import 'auth.dart';
+
+class EmailFieldValidator{
+  static String validate(String value){
+    return value.isEmpty ? 'O email não pode ser vazio' : null;
+  }
+}
+
+class PasswordFieldValidator{
+  static String validate(String value){
+    return value.isEmpty ? 'A senha não pode ser vazia' : null;
+  }
+}
 
 enum FormType {
   login,
@@ -8,8 +20,7 @@ enum FormType {
 }
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({this.auth, this.onSignedIn});
-  final BaseAuth auth;
+  LoginScreen({this.onSignedIn});
   final VoidCallback onSignedIn;
 
   @override
@@ -39,13 +50,14 @@ class _LoginScreenState extends State<LoginScreen>{
   void validateAndSubmit() async {
     if (validateAndSave()) {
       try {
+        var auth = AuthProvider.of(context).auth;
         if (_formType == FormType.login) {
-          String userId = await widget.auth.signInWithEmailAndPassword(_email, _password);
-          print('Signed in: $userId');
+          String userId = await auth.signInWithEmailAndPassword(_email, _password);
+//          print('Signed in: $userId');
           }
         else {
-          String userId = await widget.auth.createUserWithEmailAndPassword(_email, _password);
-          print('Usuário registrado: $userId');
+          String userId = await auth.createUserWithEmailAndPassword(_email, _password);
+//          print('Usuário registrado: $userId');
         }
         widget.onSignedIn();
       }
@@ -75,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Login'),
+          title: Text('Entre com a sua conta'),
       ),
       body: Container(
 
@@ -97,13 +109,15 @@ class _LoginScreenState extends State<LoginScreen>{
   List<Widget> buildInputs() {
     return [
       TextFormField(
+        key: Key('email'),
         decoration: InputDecoration(labelText: 'Email'),
-        validator: (value) => value.isEmpty ? 'O email não pode ser vazio' : null,
+        validator: EmailFieldValidator.validate,
         onSaved: (value) => _email = value,
       ),
       TextFormField(
+        key: Key('password'),
         decoration: InputDecoration(labelText: 'Senha'),
-        validator: (value) => value.isEmpty ? 'A senha não pode ser vazia' : null,
+        validator: PasswordFieldValidator.validate,
         onSaved: (value) => _password = value,
         obscureText: true,
       ),
@@ -115,10 +129,12 @@ class _LoginScreenState extends State<LoginScreen>{
     if (_formType == FormType.login) {
       return [
         RaisedButton(
+          key: Key('SignIn'),
           child: Text('Login', style: TextStyle(fontSize: 20)),
           onPressed: validateAndSubmit,
         ),
         FlatButton(
+          key: Key('SignUp'),
           child: Text('Criar uma conta', style: TextStyle(fontSize: 20)),
           onPressed: moveToRegister,
         )
